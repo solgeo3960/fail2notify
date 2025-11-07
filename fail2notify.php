@@ -3,7 +3,7 @@
  * Plugin Name: Fail2Notify – WP Mail Failure Alerts
  * Description: wp_mail() の送信失敗を検知して Slack などへ即時通知します（MVPはSlack対応）。
  * Version: 0.1.0
- * Author: Your Name
+ * Author: Solgeo Corp.
  * Text Domain: fail2notify
  */
 
