@@ -1,7 +1,7 @@
 === Fail2Notify – WP Mail Failure Alerts ===
-Contributors: Solgeo Corp.
-Donate link:
-Tags: wp_mail, slack, notification, email, logging,Contact Form 7
+Contributors: solgeo3960
+Donate link: https://solgeo.co.jp/
+Tags: wp_mail, slack, notification, email, logging
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
