@@ -79,6 +79,7 @@ class F2N_Admin {
                 $opts = get_option( F2N_OPTION_KEY, [] );
                 $val  = $opts['slack_webhook'] ?? '';
                 echo '<input type="url" class="regular-text code" placeholder="https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX" name="' . esc_attr( F2N_OPTION_KEY ) . '[slack_webhook]" value="' . esc_attr( $val ) . '">';
+                echo '<p class="description">' . esc_html__( 'Create a Slack app at api.slack.com/apps, enable “Incoming Webhooks”, add the target channel, then copy the generated webhook URL into this field.', 'fail2notify' ) . '</p>';
             },
             'f2n-settings',
             'f2n_main'
