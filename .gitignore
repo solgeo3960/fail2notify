@@ -1,0 +1,81 @@
+# WordPress
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Composer (もし使う場合)
+/vendor/
+composer.lock
+
+# Node modules (もしビルドツールを使う場合)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# ビルド成果物・配布用ファイル
+/dist/
+/build/
+*.zip
+*.tar.gz
+*.rar
+
+# 環境変数・設定ファイル
+.env
+.env.local
+.env.*.local
+config.local.php
+wp-config-local.php
+
+# 一時ファイル
+*.tmp
+*.bak
+*.cache
+*.swp
+*.swo
+*~
+
+# テスト関連
+/tests/coverage/
+.phpunit.result.cache
+/tests/tmp/
+
+# 開発用ファイル
+*.local.php
+debug.log
+error_log
+php_error.log
+
+# WordPress デバッグログ
+wp-content/debug.log
+
+# バックアップファイル
+*.backup
+*.old
+*.orig
+
+# ドキュメント生成（もし使う場合）
+/docs/_build/
