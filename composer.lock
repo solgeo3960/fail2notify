@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2b09ec19a9e86d42341aed50595151e5",
+    "packages": [
+        {
+            "name": "solgeo/fail2notify-core",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../../fail2notify-core",
+                "reference": "5b3a82e07699c7330667f9ba8f918c914d568a9a"
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "F2N\\Core\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Solgeo Corp.",
+                    "email": "wp@solgeo.co.jp"
+                }
+            ],
+            "description": "Core functionality shared between Fail2Notify plugins.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "solgeo/fail2notify-core": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.4"
+    },
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

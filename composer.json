@@ -1,0 +1,40 @@
+{
+    "name": "solgeo/fail2notify",
+    "description": "Fail2Notify free plugin bootstrap",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Solgeo Corp.",
+            "email": "wp@solgeo.co.jp"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "solgeo/fail2notify-core": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fail2Notify\\Free\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../fail2notify-core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "scripts": {
+        "build": [
+            "@php bin/build-release.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

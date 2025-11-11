@@ -25,25 +25,24 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Composer (もし使う場合)
+# Composer (もし使ぁE��吁E
 /vendor/
-composer.lock
 
-# Node modules (もしビルドツールを使う場合)
+# Node modules (もしビルドツールを使ぁE��吁E
 node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
 yarn.lock
 
-# ビルド成果物・配布用ファイル
+# ビルド�E果物・配币E��ファイル
 /dist/
 /build/
 *.zip
 *.tar.gz
 *.rar
 
-# 環境変数・設定ファイル
+# 環墁E��数・設定ファイル
 .env
 .env.local
 .env.*.local
@@ -58,7 +57,7 @@ wp-config-local.php
 *.swo
 *~
 
-# テスト関連
+# チE��ト関連
 /tests/coverage/
 .phpunit.result.cache
 /tests/tmp/
@@ -69,13 +68,13 @@ debug.log
 error_log
 php_error.log
 
-# WordPress デバッグログ
+# WordPress チE��チE��ログ
 wp-content/debug.log
 
-# バックアップファイル
+# バックアチE�Eファイル
 *.backup
 *.old
 *.orig
 
-# ドキュメント生成（もし使う場合）
+# ドキュメント生成（もし使ぁE��合！E
 /docs/_build/
