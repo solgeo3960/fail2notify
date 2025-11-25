@@ -122,6 +122,8 @@ function add_dir_to_zip(ZipArchive $zip, string $dir, int $strip): void
         }
         $path = $dir . DIRECTORY_SEPARATOR . $item;
         $relative = substr($path, $strip);
+        // Convert Windows path separators to forward slashes for ZIP
+        $relative = str_replace('\\', '/', $relative);
         if (is_dir($path)) {
             add_dir_to_zip($zip, $path, $strip);
         } else {
