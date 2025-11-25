@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+// phpcs:ignoreFile -- This is a CLI build script, not executed in WordPress context
 
 declare(strict_types=1);
 
