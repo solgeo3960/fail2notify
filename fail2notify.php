@@ -19,9 +19,9 @@ define( 'FAIL2NOTIFY_URL', plugin_dir_url( __FILE__ ) );
 define( 'FAIL2NOTIFY_OPTION_KEY', 'fail2notify_settings' );
 define( 'FAIL2NOTIFY_LOG_OPTION_KEY', 'fail2notify_logs' );
 
-$autoload = __DIR__ . '/vendor/autoload.php';
+$fail2notify_autoload = __DIR__ . '/vendor/autoload.php';
 
-if ( ! file_exists( $autoload ) ) {
+if ( ! file_exists( $fail2notify_autoload ) ) {
 	add_action(
 		'admin_notices',
 		static function () {
@@ -35,9 +35,9 @@ if ( ! file_exists( $autoload ) ) {
 	return;
 }
 
-require_once $autoload;
+require_once $fail2notify_autoload;
 
-$config = new \F2N\Core\Config(
+$fail2notify_config = new \F2N\Core\Config(
 	[
 		'slug'              => 'fail2notify',
 		'option_key'        => FAIL2NOTIFY_OPTION_KEY,
@@ -50,12 +50,12 @@ $config = new \F2N\Core\Config(
 	]
 );
 
-$logger = new \F2N\Core\Logger( $config );
-$plugin = new \F2N\Core\Plugin( $config, $logger );
-$admin  = new \F2N\Core\Admin( $config, $logger );
+$fail2notify_logger = new \F2N\Core\Logger( $fail2notify_config );
+$fail2notify_plugin = new \F2N\Core\Plugin( $fail2notify_config, $fail2notify_logger );
+$fail2notify_admin  = new \F2N\Core\Admin( $fail2notify_config, $fail2notify_logger );
 
 add_filter(
-	$config->hook( 'notifiers' ),
+	$fail2notify_config->hook( 'notifiers' ),
 	static function ( array $notifiers, array $settings ) {
 		if ( ! empty( $settings['slack_webhook'] ) ) {
 			$notifiers[] = new \F2N\Core\Notifiers\Slack( $settings['slack_webhook'] );
@@ -69,8 +69,8 @@ add_filter(
 
 add_action(
 	'plugins_loaded',
-	static function () use ( $plugin, $admin ) {
-		$plugin->init();
-		$admin->init();
+	static function () use ( $fail2notify_plugin, $fail2notify_admin ) {
+		$fail2notify_plugin->init();
+		$fail2notify_admin->init();
 	}
 );

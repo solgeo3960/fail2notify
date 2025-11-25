@@ -24,6 +24,7 @@ if ($runComposer) {
     chdir($cwd ?: $root);
     if (0 !== $code) {
         fwrite(STDERR, "Composer install failed.\n");
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI script, exit code is safe
         exit($code);
     }
 }
@@ -58,8 +59,10 @@ $zip = new ZipArchive();
 if (true === $zip->open($zipTarget, ZipArchive::CREATE)) {
     add_dir_to_zip($zip, $buildDir, strlen($distDir) + 1);
     $zip->close();
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI script, file path is safe
     echo "Release build created at {$zipTarget}\n";
 } else {
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI script, file path is safe
     fwrite(STDERR, "Unable to create {$zipTarget}\n");
     exit(1);
 }
