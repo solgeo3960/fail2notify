@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Fail2Notify - WP Mail Failure Alerts
+ * Plugin Name: Fail2Notify — Mail Failure Alerts
  * Description: Detect wp_mail() transport failures and send instant, masked Slack notifications so you never miss email issues.
  * Version: 1.0.0
  * Author: Solgeo Corp.
@@ -13,11 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'F2N_VERSION', '1.0.0' );
-define( 'F2N_PATH', plugin_dir_path( __FILE__ ) );
-define( 'F2N_URL', plugin_dir_url( __FILE__ ) );
-define( 'F2N_OPTION_KEY', 'f2n_settings' );
-define( 'F2N_LOG_OPTION_KEY', 'f2n_logs' );
+define( 'FAIL2NOTIFY_VERSION', '1.0.0' );
+define( 'FAIL2NOTIFY_PATH', plugin_dir_path( __FILE__ ) );
+define( 'FAIL2NOTIFY_URL', plugin_dir_url( __FILE__ ) );
+define( 'FAIL2NOTIFY_OPTION_KEY', 'fail2notify_settings' );
+define( 'FAIL2NOTIFY_LOG_OPTION_KEY', 'fail2notify_logs' );
 
 $autoload = __DIR__ . '/vendor/autoload.php';
 
@@ -39,10 +39,10 @@ require_once $autoload;
 
 $config = new \F2N\Core\Config(
 	[
-		'slug'              => 'f2n',
-		'option_key'        => F2N_OPTION_KEY,
-		'log_option_key'    => F2N_LOG_OPTION_KEY,
-		'settings_page_slug'=> 'f2n-settings',
+		'slug'              => 'fail2notify',
+		'option_key'        => FAIL2NOTIFY_OPTION_KEY,
+		'log_option_key'    => FAIL2NOTIFY_LOG_OPTION_KEY,
+		'settings_page_slug'=> 'fail2notify-settings',
 		'text_domain'       => 'fail2notify',
 		'menu_page_title'   => 'Fail2Notify Settings',
 		'menu_title'        => 'Fail2Notify',

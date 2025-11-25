@@ -1,4 +1,4 @@
-=== Fail2Notify - WP Mail Failure Alerts ===
+=== Fail2Notify — Mail Failure Alerts ===
 Contributors: solgeo3960
 Donate link: https://solgeo.co.jp/
 Tags: wp_mail, slack, notification, email, logging
