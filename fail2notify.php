@@ -55,9 +55,52 @@ $fail2notify_plugin = new \F2N\Core\Plugin( $fail2notify_config, $fail2notify_lo
 $fail2notify_admin  = new \F2N\Core\Admin( $fail2notify_config, $fail2notify_logger );
 
 add_filter(
+	static function ( array $fields ) use ( $fail2notify_config ) {
+		// Modify existing Slack field to match Chatwork style
+		foreach ( $fields as &$field ) {
+			if ( $field['id'] === 'slack_webhook' ) {
+				$field['title']    = __( 'Slack Notifications', 'fail2notify' );
+				$field['callback'] = static function () use ( $fail2notify_config ) {
+					$opts          = get_option( $fail2notify_config->optionKey, [] );
+					$slack_enabled = ! isset( $opts['slack_enabled'] ) || ! empty( $opts['slack_enabled'] );
+					$val           = $opts['slack_webhook'] ?? '';
+					?>
+					<label>
+						<input type="checkbox" name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_enabled]" value="1" <?php checked( $slack_enabled ); ?>>
+						<?php esc_html_e( 'Enable Slack alerts', 'fail2notify' ); ?>
+					</label>
+					<br><br>
+					<label>
+						<?php esc_html_e( 'Webhook URL:', 'fail2notify' ); ?>
+						<input type="url" class="regular-text code" placeholder="https://hooks.slack.com/services/..." name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_webhook]" value="<?php echo esc_attr( $val ); ?>">
+					</label>
+					<p class="description"><?php esc_html_e( 'Create an incoming webhook inside Slack and paste the URL here.', 'fail2notify' ); ?></p>
+					<?php
+				};
+				break;
+			}
+		}
+		unset( $field );
+
+		return $fields;
+	}
+);
+
+add_filter(
+	$fail2notify_config->hook( 'sanitize_settings' ),
+	static function ( array $sanitized, array $input ) {
+		$sanitized['slack_enabled'] = empty( $input['slack_enabled'] ) ? 0 : 1;
+		return $sanitized;
+	},
+	10,
+	2
+);
+
+add_filter(
 	$fail2notify_config->hook( 'notifiers' ),
 	static function ( array $notifiers, array $settings ) {
-		if ( ! empty( $settings['slack_webhook'] ) ) {
+		$slack_enabled = ! isset( $settings['slack_enabled'] ) || ! empty( $settings['slack_enabled'] );
+		if ( $slack_enabled && ! empty( $settings['slack_webhook'] ) ) {
 			$notifiers[] = new \F2N\Core\Notifiers\Slack( $settings['slack_webhook'] );
 		}
 
