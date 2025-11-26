@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Plugin Name: Fail2Notify — Mail Failure Alerts
  * Description: Detect wp_mail() transport failures and send instant, masked Slack notifications so you never miss email issues.
@@ -7,6 +7,8 @@
  * Author URI: https://solgeo.co.jp/
  * License: GPLv2 or later
  * Text Domain: fail2notify-mail-failure-alerts
+ *
+ * @package Fail2Notify\MailFailureAlerts
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,16 +40,16 @@ if ( ! file_exists( $fail2notify_autoload ) ) {
 require_once $fail2notify_autoload;
 
 $fail2notify_config = new \F2N\Core\Config(
-	[
-		'slug'              => 'fail2notify-mail-failure-alerts',
-		'option_key'        => FAIL2NOTIFY_OPTION_KEY,
-		'log_option_key'    => FAIL2NOTIFY_LOG_OPTION_KEY,
-		'settings_page_slug'=> 'fail2notify-settings',
-		'text_domain'       => 'fail2notify-mail-failure-alerts',
-		'menu_page_title'   => 'Fail2Notify Settings',
-		'menu_title'        => 'Fail2Notify',
-		'log_limit'         => 20,
-	]
+	array(
+		'slug'               => 'fail2notify-mail-failure-alerts',
+		'option_key'         => FAIL2NOTIFY_OPTION_KEY,
+		'log_option_key'     => FAIL2NOTIFY_LOG_OPTION_KEY,
+		'settings_page_slug' => 'fail2notify-settings',
+		'text_domain'        => 'fail2notify-mail-failure-alerts',
+		'menu_page_title'    => 'Fail2Notify Settings',
+		'menu_title'         => 'Fail2Notify',
+		'log_limit'          => 20,
+	)
 );
 
 $fail2notify_logger = new \F2N\Core\Logger( $fail2notify_config );
@@ -57,23 +59,25 @@ $fail2notify_admin  = new \F2N\Core\Admin( $fail2notify_config, $fail2notify_log
 add_filter(
 	$fail2notify_config->hook( 'settings_fields' ),
 	static function ( array $fields ) use ( $fail2notify_config ) {
-		// Modify existing Slack field to match Chatwork style
+		// Modify existing Slack field to match Chatwork style.
 		foreach ( $fields as &$field ) {
-			if ( $field['id'] === 'slack_webhook' ) {
+			if ( 'slack_webhook' === $field['id'] ) {
 				$field['title']    = __( 'Slack Notifications', 'fail2notify-mail-failure-alerts' );
 				$field['callback'] = static function () use ( $fail2notify_config ) {
-					$opts          = get_option( $fail2notify_config->optionKey, [] );
+					// phpcs:ignore WordPress.NamingConventions.ValidVariableName -- Config exposes camelCase keys.
+					$option_key    = $fail2notify_config->optionKey;
+					$opts          = get_option( $option_key, array() );
 					$slack_enabled = ! isset( $opts['slack_enabled'] ) || ! empty( $opts['slack_enabled'] );
-					$val           = $opts['slack_webhook'] ?? '';
+					$val           = isset( $opts['slack_webhook'] ) ? $opts['slack_webhook'] : '';
 					?>
 					<label>
-						<input type="checkbox" name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_enabled]" value="1" <?php checked( $slack_enabled ); ?>>
+						<input type="checkbox" name="<?php echo esc_attr( $option_key ); ?>[slack_enabled]" value="1" <?php checked( $slack_enabled ); ?>>
 						<?php esc_html_e( 'Enable Slack alerts', 'fail2notify-mail-failure-alerts' ); ?>
 					</label>
 					<br><br>
 					<label>
 						<?php esc_html_e( 'Webhook URL:', 'fail2notify-mail-failure-alerts' ); ?>
-						<input type="url" class="regular-text code" placeholder="https://hooks.slack.com/services/..." name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_webhook]" value="<?php echo esc_attr( $val ); ?>">
+						<input type="url" class="regular-text code" placeholder="https://hooks.slack.com/services/..." name="<?php echo esc_attr( $option_key ); ?>[slack_webhook]" value="<?php echo esc_attr( $val ); ?>">
 					</label>
 					<p class="description"><?php esc_html_e( 'Create an incoming webhook inside Slack and paste the URL here.', 'fail2notify-mail-failure-alerts' ); ?></p>
 					<?php
