@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Plugin Name: Fail2Notify — Mail Failure Alerts
  * Description: Detect wp_mail() transport failures and send instant, masked Slack notifications so you never miss email issues.
