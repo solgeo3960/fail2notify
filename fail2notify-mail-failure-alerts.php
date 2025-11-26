@@ -6,7 +6,7 @@
  * Author: Solgeo Corp.
  * Author URI: https://solgeo.co.jp/
  * License: GPLv2 or later
- * Text Domain: fail2notify
+ * Text Domain: fail2notify-mail-failure-alerts
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +27,7 @@ if ( ! file_exists( $fail2notify_autoload ) ) {
 		static function () {
 			if ( current_user_can( 'manage_options' ) ) {
 				echo '<div class="notice notice-error"><p>';
-				esc_html_e( 'Fail2Notify is in Composer mode. Please run composer install before activating the plugin.', 'fail2notify' );
+				esc_html_e( 'Fail2Notify is in Composer mode. Please run composer install before activating the plugin.', 'fail2notify-mail-failure-alerts' );
 				echo '</p></div>';
 			}
 		}
@@ -39,11 +39,11 @@ require_once $fail2notify_autoload;
 
 $fail2notify_config = new \F2N\Core\Config(
 	[
-		'slug'              => 'fail2notify',
+		'slug'              => 'fail2notify-mail-failure-alerts',
 		'option_key'        => FAIL2NOTIFY_OPTION_KEY,
 		'log_option_key'    => FAIL2NOTIFY_LOG_OPTION_KEY,
 		'settings_page_slug'=> 'fail2notify-settings',
-		'text_domain'       => 'fail2notify',
+		'text_domain'       => 'fail2notify-mail-failure-alerts',
 		'menu_page_title'   => 'Fail2Notify Settings',
 		'menu_title'        => 'Fail2Notify',
 		'log_limit'         => 20,
@@ -55,11 +55,12 @@ $fail2notify_plugin = new \F2N\Core\Plugin( $fail2notify_config, $fail2notify_lo
 $fail2notify_admin  = new \F2N\Core\Admin( $fail2notify_config, $fail2notify_logger );
 
 add_filter(
+	$fail2notify_config->hook( 'settings_fields' ),
 	static function ( array $fields ) use ( $fail2notify_config ) {
 		// Modify existing Slack field to match Chatwork style
 		foreach ( $fields as &$field ) {
 			if ( $field['id'] === 'slack_webhook' ) {
-				$field['title']    = __( 'Slack Notifications', 'fail2notify' );
+				$field['title']    = __( 'Slack Notifications', 'fail2notify-mail-failure-alerts' );
 				$field['callback'] = static function () use ( $fail2notify_config ) {
 					$opts          = get_option( $fail2notify_config->optionKey, [] );
 					$slack_enabled = ! isset( $opts['slack_enabled'] ) || ! empty( $opts['slack_enabled'] );
@@ -67,14 +68,14 @@ add_filter(
 					?>
 					<label>
 						<input type="checkbox" name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_enabled]" value="1" <?php checked( $slack_enabled ); ?>>
-						<?php esc_html_e( 'Enable Slack alerts', 'fail2notify' ); ?>
+						<?php esc_html_e( 'Enable Slack alerts', 'fail2notify-mail-failure-alerts' ); ?>
 					</label>
 					<br><br>
 					<label>
-						<?php esc_html_e( 'Webhook URL:', 'fail2notify' ); ?>
+						<?php esc_html_e( 'Webhook URL:', 'fail2notify-mail-failure-alerts' ); ?>
 						<input type="url" class="regular-text code" placeholder="https://hooks.slack.com/services/..." name="<?php echo esc_attr( $fail2notify_config->optionKey ); ?>[slack_webhook]" value="<?php echo esc_attr( $val ); ?>">
 					</label>
-					<p class="description"><?php esc_html_e( 'Create an incoming webhook inside Slack and paste the URL here.', 'fail2notify' ); ?></p>
+					<p class="description"><?php esc_html_e( 'Create an incoming webhook inside Slack and paste the URL here.', 'fail2notify-mail-failure-alerts' ); ?></p>
 					<?php
 				};
 				break;

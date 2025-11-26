@@ -24,7 +24,7 @@ Fail2Notify hooks into the core `wp_mail_failed` action to capture transport err
 
 == Installation ==
 
-1. Upload the `fail2notify` directory to `/wp-content/plugins/` or install via the Plugins screen.
+1. Upload the `fail2notify-mail-failure-alerts` directory to `/wp-content/plugins/` or install via the Plugins screen.
 2. Activate the plugin through "Plugins" > "Installed Plugins".
 3. Open "Settings" > "Fail2Notify".
 4. Enable monitoring, optionally set the site/environment labels, and save your Slack Webhook URL.

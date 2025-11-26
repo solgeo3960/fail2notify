@@ -8,7 +8,7 @@ use ZipArchive;
 
 $root = dirname(__DIR__);
 $distDir = $root . DIRECTORY_SEPARATOR . 'dist';
-$buildDir = $distDir . DIRECTORY_SEPARATOR . 'fail2notify';
+$buildDir = $distDir . DIRECTORY_SEPARATOR . 'fail2notify-mail-failure-alerts';
 
 $options = getopt('', ['skip-composer']);
 $runComposer = ! isset($options['skip-composer']);
@@ -51,7 +51,7 @@ $excludes = [
 
 copy_dir($root, $buildDir, $excludes);
 
-$zipTarget = $distDir . DIRECTORY_SEPARATOR . 'fail2notify.zip';
+$zipTarget = $distDir . DIRECTORY_SEPARATOR . 'fail2notify-mail-failure-alerts.zip';
 if (file_exists($zipTarget)) {
     unlink($zipTarget);
 }
