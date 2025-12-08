@@ -5,7 +5,7 @@ Tags: wp_mail, slack, notification, email, logging
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ The bundled logger keeps the latest 50 entries. Future releases may add filters;
 
 == Changelog ==
 
+= 1.0.2 =
+* Maintenance release: version unification and added textdomain support.
+
 = 1.0.0 =
 * Initial release with Slack notifications, masking, in-dashboard logs, and manual test trigger.
 
@@ -86,6 +89,9 @@ Fail2Notifyは、WordPressコアの`wp_mail_failed`アクションにフック�
 バンドルされているロガーは最新50エントリを保持します。今後のリリースではフィルターが追加される可能性があります。それまでは、ロガークラスを拡張または交換して、別の場所に永続化できます。
 
 == 変更履歴 ==
+
+= 1.0.2 =
+* メンテナンスリリース：バージョン表記の統一と翻訳ファイルの読み込み処理の追加。
 
 = 1.0.0 =
 Slack通知、マスキング、ダッシュボード内ログ、手動テストトリガーを含む初回リリース。

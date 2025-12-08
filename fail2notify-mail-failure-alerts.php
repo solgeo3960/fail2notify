@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fail2Notify — Mail Failure Alerts
  * Description: Detect wp_mail() transport failures and send instant, masked Slack notifications so you never miss email issues.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author: Solgeo Corp.
  * Author URI: https://solgeo.co.jp/
  * License: GPLv2 or later
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAIL2NOTIFY_VERSION', '1.0.0' );
+define( 'FAIL2NOTIFY_VERSION', '1.0.2' );
 define( 'FAIL2NOTIFY_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FAIL2NOTIFY_URL', plugin_dir_url( __FILE__ ) );
 define( 'FAIL2NOTIFY_OPTION_KEY', 'fail2notify_settings' );
@@ -118,6 +118,7 @@ add_filter(
 add_action(
 	'plugins_loaded',
 	static function () use ( $fail2notify_plugin, $fail2notify_admin ) {
+		load_plugin_textdomain( 'fail2notify-mail-failure-alerts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		$fail2notify_plugin->init();
 		$fail2notify_admin->init();
 	}
