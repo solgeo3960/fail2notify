@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fail2Notify — Mail Failure Alerts
  * Description: Detect wp_mail() transport failures and send instant, masked Slack notifications so you never miss email issues.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Solgeo Corp.
  * Author URI: https://solgeo.co.jp/
  * License: GPLv2 or later
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAIL2NOTIFY_VERSION', '1.0.2' );
+define( 'FAIL2NOTIFY_VERSION', '1.0.3' );
 define( 'FAIL2NOTIFY_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FAIL2NOTIFY_URL', plugin_dir_url( __FILE__ ) );
 define( 'FAIL2NOTIFY_OPTION_KEY', 'fail2notify_settings' );
@@ -86,6 +86,30 @@ add_filter(
 			}
 		}
 		unset( $field );
+
+		return $fields;
+	}
+);
+
+add_filter(
+	$fail2notify_config->hook( 'settings_fields' ),
+	static function ( array $fields ) {
+		$fields[] = array(
+			'id'       => 'manual_link',
+			'title'    => __( 'Manual', 'fail2notify-mail-failure-alerts' ),
+			'callback' => static function () {
+				?>
+				<p>
+					<a href="https://solgeo.co.jp/fail2notify-how-to-setup" target="_blank" rel="noopener noreferrer">日本語マニュアル</a>
+					<br>
+					<a href="https://solgeo.co.jp/fail2notify-how-to-setup-en" target="_blank" rel="noopener noreferrer">English Manual</a>
+				</p>
+				<p class="description">
+					<?php esc_html_e( 'Please refer to the manual for setup instructions.', 'fail2notify-mail-failure-alerts' ); ?>
+				</p>
+				<?php
+			},
+		);
 
 		return $fields;
 	}

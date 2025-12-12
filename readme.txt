@@ -5,7 +5,7 @@ Tags: wp_mail, slack, notification, email, logging
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Fail2Notify hooks into the core `wp_mail_failed` action to capture transport err
 * Automatic masking for email addresses in any field, including the message body.
 * Up to 50 recent logs visible inside the settings page.
 * Manual "Send Test Notification" button for quick verification.
+
+= Documentation =
+* [Setup Manual (English)](https://solgeo.co.jp/fail2notify-how-to-setup-en)
 
 == Installation ==
 
@@ -47,6 +50,9 @@ The bundled logger keeps the latest 50 entries. Future releases may add filters;
 
 == Changelog ==
 
+= 1.0.3 =
+* Added links to the setup manual in the settings page and readme.
+
 = 1.0.2 =
 * Maintenance release: version unification and added textdomain support.
 
@@ -69,6 +75,9 @@ Fail2Notifyは、WordPressコアの`wp_mail_failed`アクションにフック�
 * 設定ページ内で最新50件の送信失敗＆失敗の通知先のログが表示されます。
 * 接続を素早く確認できる「テスト通知を送信」ボタンがあるのでその場で設定に問題がないか確認できます。
 
+= マニュアル =
+* [日本語マニュアル](https://solgeo.co.jp/fail2notify-how-to-setup)
+
 == インストール ==
 
 1. `fail2notify-mail-failure-alerts`ディレクトリを`/wp-content/plugins/`にアップロードするか、プラグイン画面からインストールします。
@@ -89,6 +98,9 @@ Fail2Notifyは、WordPressコアの`wp_mail_failed`アクションにフック�
 バンドルされているロガーは最新50エントリを保持します。今後のリリースではフィルターが追加される可能性があります。それまでは、ロガークラスを拡張または交換して、別の場所に永続化できます。
 
 == 変更履歴 ==
+
+= 1.0.3 =
+* 設定画面およびReadmeにマニュアルへのリンクを追加しました。
 
 = 1.0.2 =
 * メンテナンスリリース：バージョン表記の統一と翻訳ファイルの読み込み処理の追加。
